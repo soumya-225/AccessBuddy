@@ -24,6 +24,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -42,6 +43,8 @@ import com.sks225.accessbuddy.databinding.MoreFeaturesBinding
 import com.sks225.accessbuddy.databinding.TabsViewBinding
 import com.sks225.accessbuddy.model.Bookmark
 import com.sks225.accessbuddy.model.Tab
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.net.URL
 import java.text.SimpleDateFormat
@@ -71,6 +74,11 @@ class MainActivity : AppCompatActivity() {
 //        }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        lifecycleScope.launch {
+            delay(1000)
+            (application as AccessBuddyApplication).container.textToSpeechHandler.speak("Hello")
+        }
 
         getAllBookmarks()
 
