@@ -6,6 +6,7 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">#FFFFFF</item>
     </style>
+
     <style name="Theme.RemoveSplashScreenTheme" parent="Base.Theme.AccessBuddy">
         <item name="android:windowIsTranslucent">true</item>
     </style>
@@ -21,4 +22,10 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
     </style>
+
+    <style name="DialogSwipeUpAnimation">
+        <item name="android:windowEnterAnimation">@anim/swipe_up</item>
+        <item name="android:windowExitAnimation">@anim/swipe_down</item> <!-- Optional exit animation -->
+    </style>
+
 </resources>

@@ -13,6 +13,7 @@ import android.print.PrintJob
 import android.print.PrintManager
 import android.util.Log
 import android.view.Gravity
+import android.view.WindowManager
 import android.webkit.WebView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         var bookmarkIndex: Int = -1
         lateinit var myPager: ViewPager2
         lateinit var tabsBtn: MaterialTextView
-        lateinit var bottomMenu: BottomMenuFragment
+        //lateinit var bottomMenu: BottomMenuFragment
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        bottomMenu = BottomMenuFragment()
+        //bottomMenu = BottomMenuFragment()
 
         lifecycleScope.launch {
             delay(1000)
@@ -190,11 +191,22 @@ class MainActivity : AppCompatActivity() {
 
             val dialog = MaterialAlertDialogBuilder(this).setView(view).create()
 
+            dialog.window?.let { window ->
+                val params = window.attributes
+                params.width = WindowManager.LayoutParams.MATCH_PARENT // set width to maximum
+                window.attributes = params
+            }
+
             dialog.window?.apply {
                 attributes.gravity = Gravity.BOTTOM
-                attributes.y = 50
+                attributes.y = 0
                 setBackgroundDrawable(ColorDrawable(0xFFFFFFFF.toInt()))
             }
+
+            dialog.window?.setWindowAnimations(android.R.style.Animation_Translucent)
+            dialog.window?.setWindowAnimations(R.style.DialogSwipeUpAnimation)// set your swipe-up animation style here
+
+
             dialog.show()
 
             if (isFullscreen) {
@@ -343,15 +355,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnMenu.setOnClickListener {
-            Log.d("tag", "clicked")
-            if (bottomMenu.isAdded) {
-                bottomMenu.dismiss()
-            } else {
-                bottomMenu.show(supportFragmentManager, bottomMenu.tag)
-            }
-        }
-
+//        binding.btnMenu.setOnClickListener {
+//            if (bottomMenu.isAdded) {
+//                bottomMenu.dismiss()
+//            } else {
+//                bottomMenu.show(supportFragmentManager, bottomMenu.tag)
+//            }
+//        }
 
         binding.btnBack.setOnClickListener {
             onBackPressed()
@@ -371,7 +381,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnNewTab.setOnClickListener {
-            changeTab("Google", BrowseFragment(urlNew = "www.google.com"))
+            changeTab("Google", BrowseFragment(urlNew = "https://www.google.com"))
         }
 
     }
@@ -467,6 +477,62 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         }
+    }
+
+    fun toggleFullscreen() {
+        isFullscreen = if (isFullscreen) {
+            changeFullscreen(false)
+            false
+        } else {
+            changeFullscreen(true)
+            true
+        }
+    }
+
+    fun toggleDesktopMode() {
+        val frag = getCurrentBrowseFragment()
+        frag?.binding?.webView?.apply {
+            isDesktopSite = !isDesktopSite
+            settings.userAgentString = if (isDesktopSite) {
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0"
+            } else {
+                null
+            }
+            reload()
+        }
+    }
+
+//    fun toggleBookmark() {
+//        val frag = getCurrentBrowseFragment()
+//        frag?.let {
+//            bookmarkIndex = isBookmarked(it.binding.webView.url!!)
+//            if (bookmarkIndex == -1) {
+//                addBookmark(it.binding.webView.url!!)
+//            } else {
+//                removeBookmark(bookmarkIndex)
+//            }
+//        }
+//    }
+
+    fun goBackInWebView() {
+        val frag = getCurrentBrowseFragment()
+        frag?.binding?.webView?.takeIf { it.canGoBack() }?.goBack()
+    }
+
+    fun goForwardInWebView() {
+        val frag = getCurrentBrowseFragment()
+        frag?.binding?.webView?.takeIf { it.canGoForward() }?.goForward()
+    }
+
+    fun saveCurrentPageAsPdf() {
+        val frag = getCurrentBrowseFragment()
+        frag?.let {
+            saveAsPdf(it.binding.webView)
+        }
+    }
+
+    private fun getCurrentBrowseFragment(): BrowseFragment? {
+        return tabsList.getOrNull(binding.myPager.currentItem)?.fragment as? BrowseFragment
     }
 
 }
