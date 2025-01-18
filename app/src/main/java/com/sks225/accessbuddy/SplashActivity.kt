@@ -1,14 +1,14 @@
 package com.sks225.accessbuddy
 
 import com.sks225.accessbuddy.databinding.ActivitySplashBinding
-
 import android.content.Intent
-import android.graphics.drawable.AnimatedVectorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.WindowManager
+import android.window.SplashScreen
 import androidx.appcompat.app.AppCompatActivity
-import com.airbnb.lottie.LottieAnimationView
 
 class SplashActivity : AppCompatActivity() {
 
@@ -19,6 +19,10 @@ class SplashActivity : AppCompatActivity() {
 
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
 
 //        val drawable = binding.lottieAnimationView.drawable
 //        val lottieAnimationView = binding.lottieAnimationView
