@@ -24,6 +24,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -42,6 +43,8 @@ import com.sks225.accessbuddy.databinding.MoreFeaturesBinding
 import com.sks225.accessbuddy.databinding.TabsViewBinding
 import com.sks225.accessbuddy.model.Bookmark
 import com.sks225.accessbuddy.model.Tab
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.net.URL
 import java.text.SimpleDateFormat
@@ -54,12 +57,13 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         var tabsList: ArrayList<Tab> = ArrayList()
-        private var isFullscreen: Boolean = true
+        private var isFullscreen: Boolean = false
         var isDesktopSite: Boolean = false
         var bookmarkList: ArrayList<Bookmark> = ArrayList()
         var bookmarkIndex: Int = -1
         lateinit var myPager: ViewPager2
         lateinit var tabsBtn: MaterialTextView
+        lateinit var bottomMenu: BottomMenuFragment
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +76,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        bottomMenu = BottomMenuFragment()
+
+        lifecycleScope.launch {
+            delay(1000)
+            (application as AccessBuddyApplication).container.textToSpeechHandler.speak("Hello")
+        }
+
         getAllBookmarks()
 
         tabsList.add(Tab("Home", HomeFragment()))
@@ -81,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         tabsBtn = binding.tabsBtn
 
         initializeView()
-        changeFullscreen(enable = true)
+        //changeFullscreen(enable = true)
     }
 
     override fun onRestart() {
@@ -166,7 +177,7 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        binding.settingBtn.setOnClickListener {
+        binding.btnMenu.setOnClickListener {
 
             var frag: BrowseFragment? = null
             try {
@@ -227,7 +238,7 @@ class MainActivity : AppCompatActivity() {
             dialogBinding.saveBtn.setOnClickListener {
                 dialog.dismiss()
                 if (frag != null)
-                    saveAsPdf(web = frag.binding.webView)
+                    saveAsPdf(web = frag!!.binding.webView)
                 else Snackbar.make(binding.root, "First Open A WebPage\uD83D\uDE03", 3000).show()
             }
 
@@ -332,6 +343,37 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnMenu.setOnClickListener {
+            Log.d("tag", "clicked")
+            if (bottomMenu.isAdded) {
+                bottomMenu.dismiss()
+            } else {
+                bottomMenu.show(supportFragmentManager, bottomMenu.tag)
+            }
+        }
+
+
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+
+        var frag: BrowseFragment? = null
+        try {
+            frag = tabsList[binding.myPager.currentItem].fragment as BrowseFragment
+        } catch (_: Exception) {
+        }
+
+        binding.btnForward.setOnClickListener {
+            frag?.apply {
+                if (binding.webView.canGoForward())
+                    binding.webView.goForward()
+            }
+        }
+
+        binding.btnNewTab.setOnClickListener {
+            changeTab("Google", BrowseFragment(urlNew = "www.google.com"))
+        }
+
     }
 
     override fun onResume() {
@@ -350,7 +392,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveAsPdf(web: WebView) {
+    fun saveAsPdf(web: WebView) {
         val pm = getSystemService(Context.PRINT_SERVICE) as PrintManager
 
         val jobName = "${URL(web.url).host}_${

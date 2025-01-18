@@ -1,11 +1,15 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.AccessBuddy" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.AccessBuddy" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">#FFFFFF</item>
+    </style>
+    <style name="Theme.RemoveSplashScreenTheme" parent="Base.Theme.AccessBuddy">
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="Theme.AccessBuddy" parent="Base.Theme.AccessBuddy" />
 
     <style name="roundCornerDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
         <item name="shapeAppearanceOverlay">

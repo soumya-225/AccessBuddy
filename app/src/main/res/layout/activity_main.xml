@@ -19,14 +19,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:background="#FFFFFF"
             android:orientation="horizontal"
-            android:paddingStart="10dp"
-            android:paddingTop="10dp"
+            android:padding="12dp"
             tools:ignore="RtlSymmetry">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/webIcon"
-                android:layout_width="25dp"
+                android:layout_width="28dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/baseline_search_24" />
 
@@ -36,40 +36,21 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/custom_design"
-                android:hint="Enter url"
+                android:hint="Search..."
                 android:paddingHorizontal="5dp"
+                android:paddingStart="12dp"
                 android:singleLine="true"
                 android:textColorHint="#757575" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tabsBtn"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="4dp"
-                android:layout_marginVertical="8dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:background="@drawable/custom_tabs_textview"
                 android:gravity="center"
                 android:text="1"
                 android:textColor="@color/black"
                 tools:ignore="RedundantDescriptionCheck" />
-
-            <ImageButton
-                android:id="@+id/refreshBtn"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackground"
-                android:src="@drawable/baseline_refresh_24"
-                tools:ignore="RedundantDescriptionCheck" />
-
-            <ImageButton
-                android:id="@+id/goBtn"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackground"
-                android:src="@drawable/baseline_arrow_forward_ios_24"
-                tools:ignore="RedundantDescriptionCheck" />
-
-
         </LinearLayout>
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
@@ -78,7 +59,6 @@
             android:layout_height="wrap_content"
             android:scaleY="0.5"
             android:visibility="gone" />
-
     </LinearLayout>
 
     <androidx.viewpager2.widget.ViewPager2
@@ -94,14 +74,58 @@
         android:id="@+id/settingBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_settings_24"
+        android:src="@drawable/logo"
         app:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"
         tools:ignore="RedundantDescriptionCheck" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:src="@drawable/baseline_arrow_back_ios_new_24" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_forward"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_new_tab"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:src="@drawable/baseline_add_24" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_menu"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:src="@drawable/baseline_menu_24" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.motion.widget.MotionLayout>
