@@ -1,14 +1,11 @@
 package com.sks225.accessbuddy
 
-import com.sks225.accessbuddy.databinding.ActivitySplashBinding
-
 import android.content.Intent
-import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.airbnb.lottie.LottieAnimationView
+import com.sks225.accessbuddy.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
 
