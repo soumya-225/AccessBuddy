@@ -6,4 +6,15 @@
     </style>
 
     <style name="Theme.AccessBuddy" parent="Base.Theme.AccessBuddy" />
+
+    <style name="roundCornerDialog" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="shapeAppearanceOverlay">
+            @style/shape
+        </item>
+    </style>
+
+    <style name="shape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
 </resources>

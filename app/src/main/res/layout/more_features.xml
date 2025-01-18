@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:text="Back"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:icon="@drawable/baseline_arrow_back_ios_new_24"
+            app:iconGravity="top"
+            app:iconTint="@color/black" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/forwardBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:text="Forward"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:icon="@drawable/baseline_arrow_forward_ios_24"
+            app:iconGravity="top"
+            app:iconTint="@color/black" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:icon="@drawable/baseline_save_alt_24"
+            app:iconGravity="top"
+            app:iconTint="@color/black" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bookmarkBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:text="Bookmark"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:icon="@drawable/baseline_bookmark_24"
+            app:iconGravity="top"
+            app:iconTint="@color/black" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/desktopBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:text="Desktop"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:icon="@drawable/baseline_desktop_mac_24"
+            app:iconGravity="top"
+            app:iconTint="@color/black" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fullscreenBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:text="Fullscreen"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            app:icon="@drawable/baseline_fullscreen_24"
+            app:iconGravity="top"
+            app:iconTint="@color/black" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
