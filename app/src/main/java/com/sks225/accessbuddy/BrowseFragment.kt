@@ -67,10 +67,10 @@ class BrowseFragment(private var urlNew: String = "https://www.google.com") : Fr
 
         val mainRef = requireActivity() as MainActivity
 
-        mainRef.binding.refreshBtn.visibility = View.VISIBLE
-        mainRef.binding.refreshBtn.setOnClickListener {
-            binding.webView.reload()
-        }
+//        mainRef.binding.refreshBtn.visibility = View.VISIBLE
+//        mainRef.binding.refreshBtn.setOnClickListener {
+//            binding.webView.reload()
+//        }
 
         binding.webView.apply {
             settings.javaScriptEnabled = true

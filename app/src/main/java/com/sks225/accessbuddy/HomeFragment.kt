@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
         binding.searchView.setQuery("",false)
         mainActivityRef.binding.webIcon.setImageResource(R.drawable.baseline_search_24)
 
-        mainActivityRef.binding.refreshBtn.visibility = View.GONE
+        //mainActivityRef.binding.refreshBtn.visibility = View.GONE
 
         binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(result: String?): Boolean {
@@ -47,14 +47,14 @@ class HomeFragment : Fragment() {
             }
             override fun onQueryTextChange(p0: String?): Boolean = false
         })
-        mainActivityRef.binding.goBtn.setOnClickListener {
-            if(checkForInternet(requireContext()))
-                changeTab(mainActivityRef.binding.topSearchBar.text.toString(),
-                    BrowseFragment(mainActivityRef.binding.topSearchBar.text.toString())
-                )
-            else
-                Snackbar.make(binding.root, "Internet Not Connected\uD83D\uDE03", 3000).show()
-        }
+//        mainActivityRef.binding.goBtn.setOnClickListener {
+//            if(checkForInternet(requireContext()))
+//                changeTab(mainActivityRef.binding.topSearchBar.text.toString(),
+//                    BrowseFragment(mainActivityRef.binding.topSearchBar.text.toString())
+//                )
+//            else
+//                Snackbar.make(binding.root, "Internet Not Connected\uD83D\uDE03", 3000).show()
+//        }
 
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.setItemViewCacheSize(5)
