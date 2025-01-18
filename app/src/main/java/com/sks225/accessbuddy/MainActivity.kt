@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
 import android.os.Bundle
 import android.print.PrintAttributes
 import android.print.PrintJob
@@ -107,6 +106,7 @@ class MainActivity : AppCompatActivity() {
                 binding.myPager.currentItem = tabsList.size - 1
 
             }
+
             else -> super.onBackPressed()
         }
     }
@@ -439,18 +439,12 @@ fun changeTab(url: String, fragment: Fragment, isBackground: Boolean = false) {
     if (!isBackground) myPager.currentItem = MainActivity.tabsList.size - 1
 }
 
-@Suppress("DEPRECATION")
 fun checkForInternet(context: Context): Boolean {
     val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        val network = connectivityManager.activeNetwork ?: return false
-        val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
-        activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
-    } else {
-        val networkInfo = connectivityManager.activeNetworkInfo ?: return false
-        networkInfo.isConnected
-    }
+    val network = connectivityManager.activeNetwork ?: return false
+    val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+    return activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+            activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
 }

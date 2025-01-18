@@ -13,7 +13,7 @@
         android:background="@color/cool_blue"
         android:gravity="center"
         android:singleLine="true"
-        android:text="All Bookmarks"
+        android:text="@string/all_bookmarks"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"

@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.text.SpannableStringBuilder
 import android.util.Base64
@@ -217,7 +218,7 @@ class BrowseFragment(private var urlNew: String = "https://www.google.com") : Fr
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
 
-        val message = Handler().obtainMessage()
+        val message = Handler(Looper.getMainLooper()).obtainMessage()
         binding.webView.requestFocusNodeHref(message)
         val url = message.data.getString("url")
         val imgUrl = message.data.getString("src")
